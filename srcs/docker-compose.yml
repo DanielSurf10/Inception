@@ -5,12 +5,12 @@ networks:
         name: inception
 
 volumes:
-    wordpress_volumes:
+    wordpress_volume:
         name: wordpress_volume
         driver_opts:
             o: bind
             type: none
-            device: /home/daniel/data/wordpress
+            device: /home/danbarbo/data/wordpress
 
     mariadb_volume:
         name: mariadb_volume
@@ -37,4 +37,31 @@ services:
             - inception
         expose:
             - 3306
+        restart: on-failure
+
+    wordpress:
+        depends_on:
+            - mariadb
+        image: wordpress
+        container_name: wordpress
+        env_file:
+            - .env
+        environment:
+            - TITLE
+            - DOMAIN
+            - DB_NAME
+            - ADMIN_NAME
+            - ADMIN_EMAIL
+            - ADMIN_PASSWORD
+            - USER_NAME
+            - USER_EMAIL
+            - USER_PASSWORD
+        build:
+            context: requirements/wordpress
+        volumes:
+            - wordpress_volume:/var/www/html
+        networks:
+            - inception
+        expose:
+            - 9000
         restart: on-failure

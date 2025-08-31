@@ -3,6 +3,7 @@ FROM debian:oldstable
 RUN apt update \
 	&& apt upgrade -y \
 	&& apt install mariadb-server -y \
+	&& apt autoremove -y \
 	&& apt clean
 
 RUN mkdir -p /var/run/mysqld \

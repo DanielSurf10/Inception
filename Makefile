@@ -29,7 +29,7 @@ up: build
 	fi
 
 build:
-	docker-compose -f ${COMPOSE_FILE} build
+	docker-compose -f ${COMPOSE_FILE} build;
 
 down:
 	docker-compose -f ${COMPOSE_FILE} down
@@ -40,10 +40,10 @@ ps:
 ls:
 	docker-compose -f ${COMPOSE_FILE} ls
 
-clean:
+clean: down
 	docker-compose -f ${COMPOSE_FILE} down --rmi all --volumes
 
-fclean:
+fclean: clean
 # 	rm srcs/.env
 	docker system prune --force --all --volumes
 	sudo rm -rf /home/danbarbo/data
