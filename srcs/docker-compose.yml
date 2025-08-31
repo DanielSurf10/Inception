@@ -1,0 +1,40 @@
+version: "3"
+
+networks:
+    inception:
+        name: inception
+
+volumes:
+    wordpress_volumes:
+        name: wordpress_volume
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/daniel/data/wordpress
+
+    mariadb_volume:
+        name: mariadb_volume
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/danbarbo/data/mariadb
+
+services:
+    mariadb:
+        image: mariadb
+        container_name: mariadb
+        env_file:
+            - .env
+        environment:
+            - ADMIN_NAME
+            - ADMIN_PASSWORD
+            - DB_NAME
+        build:
+            context: requirements/mariadb
+        volumes:
+            - mariadb_volume:/var/lib/mysql
+        networks:
+            - inception
+        expose:
+            - 3306
+        restart: on-failure
