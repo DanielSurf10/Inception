@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>42SP - Inception Project</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>42 São Paulo - Inception</h1>
+		<nav>
+			<ul>
+				<li><a href="#about" class="nav-link">About</a></li>
+				<li><a href="#services" class="nav-link">Services</a></li>
+				<li><a href="#contact" class="nav-link">Project Information</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<section id="about">
+			<h2>About the Project</h2>
+			<p>This is an infrastructure project using Docker and Docker Compose to create a complete environment with WordPress, MariaDB, Nginx and bonus services.</p>
+			<div class="stats">
+				<div class="stat">
+					<span class="stat-number" data-target="3">0</span>
+					<span class="stat-label">Main Services</span>
+				</div>
+				<div class="stat">
+					<span class="stat-number" data-target="6">0</span>
+					<span class="stat-label">Bonus Services</span>
+				</div>
+				<div class="stat">
+					<span class="stat-number" data-target="100">0</span>
+					<span class="stat-label">% Dockerized</span>
+				</div>
+			</div>
+		</section>
+
+		<section id="services">
+			<h2>Available Services</h2>
+			<div class="services-grid">
+				<div class="service" data-service="wordpress">
+					<h3>WordPress</h3>
+					<p>Complete CMS running on PHP-FPM</p>
+					<div class="service-status">
+						<span class="status-dot"></span>
+						<span>Active</span>
+					</div>
+				</div>
+				<div class="service" data-service="mariadb">
+					<h3>MariaDB</h3>
+					<p>Database for WordPress</p>
+					<div class="service-status">
+						<span class="status-dot"></span>
+						<span>Active</span>
+					</div>
+				</div>
+				<div class="service" data-service="nginx">
+					<h3>Nginx</h3>
+					<p>Web server with SSL</p>
+					<div class="service-status">
+						<span class="status-dot"></span>
+						<span>Active</span>
+					</div>
+				</div>
+				<div class="service" data-service="redis">
+					<h3>Redis</h3>
+					<p>Cache for performance</p>
+					<div class="service-status">
+						<span class="status-dot"></span>
+						<span>Active</span>
+					</div>
+				</div>
+				<div class="service" data-service="ftp">
+					<h3>FTP</h3>
+					<p>FTP server for file uploads</p>
+					<div class="service-status">
+						<span class="status-dot"></span>
+						<span>Active</span>
+					</div>
+				</div>
+				<div class="service" data-service="this-website">
+					<h3>This website</h3>
+					<p>Static website served by Nginx</p>
+					<div class="service-status">
+						<span class="status-dot"></span>
+						<span>Active</span>
+					</div>
+			</div>
+		</section>
+
+		<section id="contact">
+			<h2>Project Information</h2>
+			<div class="contact-info">
+				<div class="info-card">
+					<h3>Student</h3>
+					<p>danbarbo</p>
+				</div>
+				<div class="info-card">
+					<h3>Campus</h3>
+					<p>42 São Paulo</p>
+				</div>
+				<div class="info-card">
+					<h3>Project</h3>
+					<p>Inception</p>
+				</div>
+				<div class="info-card">
+					<h3>Date</h3>
+					<p id="current-date"></p>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>&copy; 2024 - Inception Project by danbarbo</p>
+		<p>Last update: <span id="last-update"></span></p>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
