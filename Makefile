@@ -12,11 +12,11 @@ config:
 		exit 1; \
 	fi
 
-	@sudo chmod 644 /etc/hosts
+# 	@sudo chmod 644 /etc/hosts
 
 	@sudo mkdir -p ${MARIA_DB_DIR}
 	@sudo mkdir -p ${WP_PHP_DIR}
-	@sudo chmod 777 ${MARIA_DB_DIR} ${WP_PHP_DIR}
+	@sudo chmod 755 ${MARIA_DB_DIR} ${WP_PHP_DIR}
 
 	@if ! grep -q 'danbarbo' /etc/hosts ; then \
 		echo "127.0.0.1 danbarbo.42.fr" | sudo tee -a /etc/hosts; \
@@ -30,28 +30,28 @@ up: build
 	fi
 
 build:
-	docker-compose -f ${COMPOSE_FILE} build;
+	@docker-compose -f ${COMPOSE_FILE} build;
 
 down:
-	docker-compose -f ${COMPOSE_FILE} down
+	@docker-compose -f ${COMPOSE_FILE} down
 
 ps:
-	docker-compose -f ${COMPOSE_FILE} ps
+	@docker-compose -f ${COMPOSE_FILE} ps
 
 ls:
-	docker-compose -f ${COMPOSE_FILE} ls
+	@docker-compose -f ${COMPOSE_FILE} ls
 
 clean: down
-	docker-compose -f ${COMPOSE_FILE} down --rmi all --volumes
+	@docker-compose -f ${COMPOSE_FILE} down --rmi all --volumes
 
 fclean: clean
 # 	rm srcs/.env
-	docker system prune --force --all --volumes
-	sudo rm -rf /home/danbarbo/data
+	@docker system prune --force --all --volumes
+	@sudo rm -rf /home/danbarbo/data
 
 re: fclean all
 
 check_comments:
-	docker exec -it mariadb mysql -u root -t -e "USE wordpress_db; SELECT comment_ID, comment_author, comment_date, LEFT(comment_content, 30) AS preview FROM wp_comments;"
+	@docker exec -it mariadb mysql -u root -t -e "USE wordpress_db; SELECT comment_ID, comment_author, comment_date, LEFT(comment_content, 30) AS preview FROM wp_comments;"
 
-.PHONY: all up config build down ls clean fclean re
+.PHONY: all up config build down ls clean fclean re check_comments

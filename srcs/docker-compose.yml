@@ -42,6 +42,7 @@ services:
     wordpress:
         depends_on:
             - mariadb
+            - redis
         image: wordpress
         container_name: wordpress
         env_file:
@@ -59,6 +60,8 @@ services:
             - DB_USER
             - DB_PASSWORD
             - DB_HOST
+            - REDIS_HOST
+            - REDIS_PORT
         build:
             context: requirements/wordpress
         volumes:
@@ -83,4 +86,15 @@ services:
             - wordpress_volume:/var/www/html
         networks:
             - inception
+        restart: on-failure
+
+    redis:
+        image: redis
+        container_name: redis
+        networks:
+            - inception
+        build:
+            context: requirements/bonus/redis
+        expose:
+            - 6379
         restart: on-failure

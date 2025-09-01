@@ -8,7 +8,7 @@ RUN apt install lsb-release apt-transport-https ca-certificates wget -y
 RUN wget -qO /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN echo "deb https://packages.sury.org/php $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 RUN apt update
-RUN apt install php8.1 php8.1-fpm php8.1-mysql mariadb-client wordpress wget -y
+RUN apt install php8.1 php8.1-fpm php8.1-mysql php8.1-redis mariadb-client wordpress wget -y
 RUN apt autoremove -y
 RUN apt clean
 
