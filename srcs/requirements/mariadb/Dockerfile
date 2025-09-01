@@ -1,16 +1,16 @@
 FROM debian:oldstable
 
-RUN apt update \
-	&& apt upgrade -y \
-	&& apt install mariadb-server -y \
-	&& apt autoremove -y \
-	&& apt clean
+RUN apt update
+RUN apt upgrade -y
+RUN apt install mariadb-server -y
+RUN apt autoremove -y
+RUN apt clean
 
-RUN mkdir -p /var/run/mysqld \
-	&& chown -R mysql:mysql /var/run/mysqld \
-	&& chmod 755 /var/run/mysqld /var/lib/mysql
+RUN mkdir -p /var/run/mysqld
+RUN chown -R mysql:mysql /var/run/mysqld
+RUN chmod 755 /var/run/mysqld /var/lib/mysql
 
-COPY conf/my.cnf etc/mysqld/my.cnf
+COPY conf/my.cnf /etc/mysql/my.cnf
 COPY tools/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh

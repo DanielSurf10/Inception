@@ -2,9 +2,13 @@
 
 set -e
 
-if [ -f /var/www/html/wp-config-sample.php ]; then
-    rm -rf /var/www/html/wp-config-sample.php
-    rm -rf /var/www/html/index.html
+if [ ! -f /var/www/html/wp-config.php ]; then
+    wp --allow-root config create \
+    --dbname="$DB_NAME" \
+    --dbuser="$DB_USER" \
+    --dbpass="$DB_PASSWORD" \
+    --dbhost="$DB_HOST" \
+    --dbprefix="wp_"
 
     wp core install --allow-root \
         --path=/var/www/html \
@@ -21,5 +25,7 @@ if [ -f /var/www/html/wp-config-sample.php ]; then
         --user_pass=$USER_PASSWORD \
         --role='author'
 fi
+
+wp --allow-root theme activate twentytwentyfour
 
 exec php-fpm8.1 -F

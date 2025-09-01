@@ -56,6 +56,9 @@ services:
             - USER_NAME
             - USER_EMAIL
             - USER_PASSWORD
+            - DB_USER
+            - DB_PASSWORD
+            - DB_HOST
         build:
             context: requirements/wordpress
         volumes:
@@ -64,4 +67,20 @@ services:
             - inception
         expose:
             - 9000
+        restart: on-failure
+
+    nginx:
+        depends_on:
+            - wordpress
+            - mariadb
+        image: nginx
+        container_name: nginx
+        build:
+            context: requirements/nginx
+        ports:
+            - 443:443
+        volumes:
+            - wordpress_volume:/var/www/html
+        networks:
+            - inception
         restart: on-failure
