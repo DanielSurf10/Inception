@@ -98,3 +98,24 @@ services:
         expose:
             - 6379
         restart: on-failure
+
+    ftp:
+        depends_on:
+            - wordpress
+        image: ftp
+        container_name: ftp
+        env_file:
+            - .env
+        build:
+            context: requirements/bonus/ftp
+        environment:
+            - FTP_USER
+            - FTP_PASSWORD
+        ports:
+            - 0.0.0.0:21:21
+            - 0.0.0.0:40000-40005:40000-40005
+        networks:
+            - inception
+        volumes:
+            - wordpress_volume:/var/www/html
+        restart: on-failure
